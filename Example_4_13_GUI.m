@@ -1,7 +1,14 @@
+%Example 4.13
+%CE F231 Fluid Mechanics Project
+%Done by: M Harikesha, Nipun Tewari, Hridik Punukollu
+
+%Taking input for the problem parameters from GUI
 x = inputdlg(["Enter the length of the side of square in meters",...
     "Enter the specific gravity of material",...
     "Enter the specific weight of water"],"Example 4.13");
 
+
+%Assigning input parameters to appropriate variables
 sideLength = str2double(x{1});
 specificGravity = str2double(x{2});
 G = str2double(x{3});
