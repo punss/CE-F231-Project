@@ -3,14 +3,23 @@
 %Done by: M Harikesha, Nipun Tewari, Hridik Punukollu
 
 %Taking input for problem parameters.
-theta = input("Angle the float is at to the vertical: ");
-theta = deg2rad(180 - theta);
-specificGravity = (input("Enter the specific gravity of the oil: "));
-floatDiameter = (input("Enter the diameter of the float in mm: "));
-floatLength = (input("Enter the distance between the float and the hinge in meters: "));
-inletDistance = (input("Enter the distance between the hinge and the inlet in meters: "));
-valveForce = (input("Enter the force with the valve must be pressed to stop the flow of oil in Newtons: "));
-flowStopHeight = (input("Enter the height of the oil below the hinge at which flow of oil would stop in meters: "));
+%Initialising GUI with required parameters.
+x = inputdlg(["Angle the float is at to the vertical",...
+    "Enter the specific gravity of the oil",...
+    "Enter the diameter of the float in mm",...
+    "Enter the distance between the float and the hinge in meters",...
+    "Enter the distance between the hinge and the inlet in meters:",...
+    "Enter the force with the valve must be pressed to stop the flow of oil in Newtons",...
+    "Enter the height of the oil below the hinge at which flow of oil would stop in meters"],"Example 4.15");
+
+%Alotting the obtained values to variables
+theta = deg2rad(180 - str2double(x{1}));
+specificGravity = str2double(x{2});
+floatDiameter = str2double(x{3});
+floatLength = str2double(x{4});
+inletDistance = str2double(x{5});
+valveForce = str2double(x{6});
+flowStopHeight = str2double(x{7});
 
 %Calculation of certain heights.
 h = (floatLength*cos(theta) - flowStopHeight);
@@ -33,3 +42,7 @@ fprintf("The buoyant force acting on the sphere is: %d N.\n", buoyantForce);
 %Calculating weight of the hinge by taking moment into consideration.
 hingeWeight = buoyantForce - (valveForce * inletDistance)/(floatLength*cos(theta));
 fprintf("The weight of the hinge is: %d N\n", hingeWeight)
+
+msgbox(sprintf("Depth of the center of the float below the oil is: %d\nVolume of the sphere immersed in the oil is: %d sq.m.\nThe buoyant force acting on the sphere is: %d N.\nThe weight of the hinge is: %d N\n",h,immersedVolume,buoyantForce,hingeWeight),"Results")
+
+
